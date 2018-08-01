@@ -2,6 +2,7 @@ let express = require('express');
 let fs = require('fs');
 let handlebars = require('express3-handlebars').create({defaultLayout:'main'});
 let fortune = require('./lib/fortune.js');
+let urlLib = require('url');
 let app = express();
 app.engine('handlebars',handlebars.engine);
 app.set('view engine','handlebars');
@@ -18,7 +19,9 @@ app.use((req,res,next)=>{
 });
 
 app.get('/',(req,res)=>{
-    res.render('home')
+    let obj = urlLib.parse(req.url,true);
+    console.log(obj);
+    res.render('home');
 });
 
 
