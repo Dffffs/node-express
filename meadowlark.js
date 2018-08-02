@@ -9,6 +9,25 @@ app.set('view engine','handlebars');
 app.set('port',process.env.PORT||3000);
 app.use(express.static(__dirname + '/public'));
 
+let addData = () => {
+    return [
+        {
+            name:'Limbo',
+            age:'18'
+        },{
+            name:'Sayrn',
+            age:'27'
+        },{
+            name:'Loki',
+            age:'15'
+        },
+    ]
+};
+app.use((req,res,next)=>{
+   if (!res.locals.partials) res.locals.partials = {};
+   res.locals.partials.buzz = addData();
+   next();
+});
 // fs.readFile(__dirname + '/public/about.html',(err,data)=>{
 //     console.log(data.toString())
 // });
@@ -26,7 +45,6 @@ app.get('/',(req,res)=>{
 
 
 app.get('/about',(req,res)=>{
-    res.type('.html');
     res.render('about',{
         fortune:fortune.getFourtune(),
         pageTestScript:'/qa/tests-about.js',
