@@ -26,5 +26,6 @@
 - body也是
 # 7 - 模板引擎
 - {{> }} handlebars会去view/partials寻找
-
+# 8 - 处理请求 post/get
+- 之前的内容巩固
 

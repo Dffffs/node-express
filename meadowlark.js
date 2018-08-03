@@ -60,9 +60,16 @@ app.get('/about/:group', function(req, res) {
     res.send("1");
 });
 
-app.get('/api/tours',(req,res)=>{
-    let s = {a:1};
-   res.json(s)
+app.post('/api/:tours',(req,res)=>{
+    let str = '';
+    //一段数据到达
+    req.on('data',(value)=>{
+        str += value;
+    });
+    //数据发送完毕
+    req.on('end',()=>{
+        console.log(str);
+    });
 });
 
 app.use((req,res)=>{
